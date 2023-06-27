@@ -141,7 +141,7 @@ class ContactFormState extends State<ContactForm>{
                   onPressed: () {
                     if(_form.currentState!.validate()){
                       _form.currentState!.save();
-                      upsertKontak();
+                      upsertContact();
                     }
                   },
                 ),
@@ -150,7 +150,7 @@ class ContactFormState extends State<ContactForm>{
           ),
         ));
   }
-  Future<void> upsertKontak() async {
+  Future<void> upsertContact() async {
     if (widget.contact != null) {
       //update
       await db.updateContact(Contact(
