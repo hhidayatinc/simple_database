@@ -92,7 +92,7 @@ void main(){
   testWidgets('TextFormField email has data', (WidgetTester tester) async{
     await tester.pumpWidget(MaterialApp(home: ContactForm(contact: c,)));
     try{
-      expect(find.widgetWithText(TextFormField, 'Risa'), findsNothing);
+      expect(find.widgetWithText(TextFormField, 'Risa'), findsOneWidget);
       print('Test Success!');
     } catch(e){
       print('Test Fail!');
