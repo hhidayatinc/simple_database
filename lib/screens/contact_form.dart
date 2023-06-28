@@ -40,7 +40,7 @@ class ContactFormState extends State<ContactForm>{
     // TODO: implement build
     return Scaffold(
         appBar: AppBar(
-            title: const Text('Form')
+            title: const Text('Contact Form')
         ),
         body: Form(
           key: _form,
