@@ -20,7 +20,7 @@ class ContactListState extends State<ContactList>{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Simple Database SQLite"),
+        title: Text("Contact List with Database SQLite"),
       ),
       body: ListView.builder(
         itemCount: listContact.length,
