@@ -1,32 +1,19 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
-import 'package:simple_database/utils/dbhelper.dart';
 
 import '../utils/contact.dart';
-import 'contact_form.dart';
 
-class ContactList extends StatefulWidget{
-  const ContactList({Key? key}) : super(key: key);
-
-  @override
-  ContactListState createState() => ContactListState();
+class ItemCard extends StatefulWidget{
+  final Contact contact;
+  final Future<void> onEditPress;
+  final Future<void> onDeletePress;
+  const ItemCard({Key? key, required this.contact, required this.onDeletePress, required this.onEditPress}) : super(key: key);
+  ItemCardState createState() => ItemCardState();
 }
 
-class ContactListState extends State<ContactList>{
-  List<Contact> listContact = [];
-  DbHelper db = DbHelper();
+class ItemCardState extends State<ItemCard>{
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Contact List with Database SQLite"),
-      ),
-      body: ListView.builder(
-        itemCount: listContact.length,
-        itemBuilder: (context, i){
-          Contact c = listContact[i];
-           return Padding(
+    return Padding(
               padding: const EdgeInsets.only(
                   top: 20
               ),
@@ -36,7 +23,7 @@ class ContactListState extends State<ContactList>{
                   size: 50,
                 ),
                 title: Text(
-                    '${c.name}'
+                    '${widget.contact.name}'
                 ),
                 subtitle: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -46,19 +33,19 @@ class ContactListState extends State<ContactList>{
                       padding: const EdgeInsets.only(
                         top: 8,
                       ),
-                      child: Text("Email: ${c.email}"),
+                      child: Text("Email: ${widget.contact.email}"),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(
                         top: 8,
                       ),
-                      child: Text("Phone: ${c.number}"),
+                      child: Text("Phone: ${widget.contact.number}"),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(
                         top: 8,
                       ),
-                      child: Text("Company: ${c.company}"),
+                      child: Text("Company: ${widget.contact.company}"),
                     )
                   ],
                 ),
@@ -69,7 +56,7 @@ class ContactListState extends State<ContactList>{
                     children: [
                       // button edit
                       IconButton(
-                          onPressed: ()async {_openFormEdit(c);},
+                          onPressed: ()async {widget.onEditPress;},
                           icon: const Icon(Icons.edit)
                       ),
                       // button hapus
@@ -84,7 +71,7 @@ class ContactListState extends State<ContactList>{
                               child: Column(
                                 children: [
                                   Text(
-                                      "Yakin ingin Menghapus Data ${c.name}"
+                                      "Yakin ingin Menghapus Data ${widget.contact.name}"
                                   )
                                 ],
                               ),
@@ -92,7 +79,7 @@ class ContactListState extends State<ContactList>{
 
                             actions: [
                               TextButton(
-                                  onPressed: () async{_deleteContact(c, i);},
+                                  onPressed: () async{widget.onDeletePress;},
                                   child: const Text("Ya")
                               ),
                               TextButton(
@@ -111,56 +98,6 @@ class ContactListState extends State<ContactList>{
                 )
               )
     );
-        },
-      ),
-       floatingActionButton: FloatingActionButton(
-        key: const Key('add icon'),
-        child: const Icon(Icons.add),
-        onPressed: () {
-          _openFormCreate();
-          },
-      ),
-    );
   }
-    //mengambil semua data Contact
-  Future<void> _getAllContact() async {
-    //list menampung data dari database
-    var list = await db.getAllContact();
-    //ada perubahanan state
-    setState(() {
-      listContact.clear();
-      //lakukan perulangan pada variabel list
-      for (var data in list!) {
-        //masukan data ke listContact
-        listContact.add(Contact.fromMap(data));
-      }
-    });
-  }
-
-  //menghapus data Contact
-  Future<void> _deleteContact(Contact contact, int position) async {
-    await db.deleteContact(contact.id!);
-    setState(() {
-      listContact.removeAt(position);
-    });
-  }
-
-  // membuka halaman tambah Contact
-  Future<void> _openFormCreate() async {
-    var result = await Navigator.push(
-        context, MaterialPageRoute(builder: (context) => ContactForm()));
-    if (result == 'save') {
-      await _getAllContact();
-    }
-  }
-
-  //membuka halaman edit Contact
-  Future<void> _openFormEdit(Contact contact) async {
-    var result = await Navigator.push(context,
-        MaterialPageRoute(builder: (context) => ContactForm(contact: contact)));
-    if (result == 'update') {
-      await _getAllContact();
-    }
-  }
-}
   
+}
