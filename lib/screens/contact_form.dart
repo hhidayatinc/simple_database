@@ -5,7 +5,7 @@ import '../utils/dbhelper.dart';
 
 class ContactForm extends StatefulWidget{
   final Contact? contact;
-  ContactForm({this.contact});
+  const ContactForm({Key? key, this.contact}) : super(key: key);
   @override
   ContactFormState createState() => ContactFormState();
 }
@@ -37,7 +37,6 @@ class ContactFormState extends State<ContactForm>{
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
         appBar: AppBar(
             title: const Text('Form')
