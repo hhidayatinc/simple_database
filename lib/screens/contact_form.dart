@@ -39,7 +39,7 @@ class ContactFormState extends State<ContactForm>{
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-            title: const Text('Form')
+            title: const Text('Contact Form')
         ),
         body: Form(
           key: _form,
@@ -140,7 +140,7 @@ class ContactFormState extends State<ContactForm>{
                   onPressed: () {
                     if(_form.currentState!.validate()){
                       _form.currentState!.save();
-                      upsertKontak();
+                      upsertContact();
                     }
                   },
                 ),
@@ -149,7 +149,7 @@ class ContactFormState extends State<ContactForm>{
           ),
         ));
   }
-  Future<void> upsertKontak() async {
+  Future<void> upsertContact() async {
     if (widget.contact != null) {
       //update
       await db.updateContact(Contact(

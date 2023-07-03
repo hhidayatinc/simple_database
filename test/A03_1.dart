@@ -73,4 +73,13 @@ void main(){
     }
   });
 
+  testWidgets('UI Component-ElevatedButton-Update', (WidgetTester tester) async{
+    await tester.pumpWidget(MaterialApp(home: ContactForm()));
+    try {
+      expect(find.widgetWithText(ElevatedButton, 'Update'), findsOneWidget);
+      print('Test Success!');
+    } catch(e){
+      print('Test fail. Button not found');
+    }
+  });
 }
