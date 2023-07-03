@@ -6,7 +6,7 @@ import 'package:simple_database/utils/contact.dart';
 void main(){
   Contact c = Contact(name: "Risa", email: "risa@gmail.com", number: "087654389090", company: "Polinema");
 
-  testWidgets('UI Component-AppBar', (WidgetTester tester) async{
+  testWidgets('UI Component-AppBar Found', (WidgetTester tester) async{
     await tester.pumpWidget(MaterialApp(home: ContactForm(contact: c)));
     try{
     expect(find.byType(AppBar), findsOneWidget);
@@ -16,7 +16,7 @@ void main(){
     }
   });
 
-  testWidgets('UI Component-Title AppBar', (WidgetTester tester) async{
+  testWidgets('UI Component-Title AppBar Found', (WidgetTester tester) async{
     await tester.pumpWidget(MaterialApp(home: ContactForm(contact: c)));
     try {
       expect(find.widgetWithText(AppBar, 'Contact Form'), findsOneWidget);
@@ -26,7 +26,7 @@ void main(){
     }
   });
 
-  testWidgets('UI Component-Form', (WidgetTester tester) async{
+  testWidgets('UI Component-Form Found', (WidgetTester tester) async{
     await tester.pumpWidget(MaterialApp(home: ContactForm(contact: c)));
     try {
       expect(find.byType(Form), findsOneWidget);
@@ -36,7 +36,7 @@ void main(){
     }
   });
 
-  testWidgets('UI Component-ListView Form', (WidgetTester tester) async{
+  testWidgets('UI Component-ListView Form Found', (WidgetTester tester) async{
     await tester.pumpWidget(MaterialApp(home: ContactForm(contact: c)));
     try {
       expect(find.byType(ListView), findsOneWidget);
@@ -46,7 +46,7 @@ void main(){
     }
   });
 
-  testWidgets('UI Component-TextFormField', (WidgetTester tester) async{
+  testWidgets('UI Component-TextFormField Found', (WidgetTester tester) async{
     await tester.pumpWidget(MaterialApp(home: ContactForm(contact: c)));
     try {
       expect(find.byType(TextFormField), findsNWidgets(4));
@@ -110,7 +110,7 @@ void main(){
     }
   });
 
-  testWidgets('UI Component-ElevatedButton-Add', (WidgetTester tester) async{
+  testWidgets('UI Component-ElevatedButton-Add Found', (WidgetTester tester) async{
     await tester.pumpWidget(MaterialApp(home: ContactForm(contact: c)));
     try {
       expect(find.widgetWithText(ElevatedButton, 'Add'), findsNothing);
@@ -120,13 +120,13 @@ void main(){
     }
   });
 
-   testWidgets('UI Component-ElevatedButton-Update', (WidgetTester tester) async{
+   testWidgets('UI Component-ElevatedButton-Update Found', (WidgetTester tester) async{
     await tester.pumpWidget(MaterialApp(home: ContactForm(contact: c)));
     try {
       expect(find.widgetWithText(ElevatedButton, 'Update'), findsOneWidget);
       print('Test Success!');
     } catch(e){
-      print('Test fail. Button not found');
+      print('Test fail. Button Update not found');
     }
   });
 

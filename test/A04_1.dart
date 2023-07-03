@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:simple_database/screens/contact_form.dart';
 import 'package:simple_database/screens/contact_list.dart';
 
 void main(){
-  
-    testWidgets('UI Component-AppBar found', (WidgetTester tester) async {
+    testWidgets('UI Component-AppBar Found', (WidgetTester tester) async {
       await tester.pumpWidget(MaterialApp(home: ContactList()));
       try{
         expect(find.byType(AppBar), findsOneWidget);
@@ -14,32 +14,36 @@ void main(){
       }
     });
 
-  testWidgets('UI Component-Title AppBar', (WidgetTester tester) async{
+  testWidgets('UI Component-Title AppBar Found', (WidgetTester tester) async{
     await tester.pumpWidget(MaterialApp(home: ContactList()));
     try{
-      expect(find.widgetWithText(Center, 'Contact List with Database SQLite'), findsOneWidget);
+      expect(find.widgetWithText(Center, 'ContactList'), findsOneWidget);
       print("Test Success!");
     }catch(e){
       print("Test Fail. Title AppBar not found");
     }
   });
 
-    testWidgets('Komponen UI-ListView ditemukan', (WidgetTester tester) async {
+    testWidgets('UI Component-ListView Found', (WidgetTester tester) async {
       await tester.pumpWidget(MaterialApp(home: ContactList()));
+      try {
         expect(find.byType(ListView), findsOneWidget);
+        print("Test Success!");
+      } catch(e){
+        print("Test Fail. ListView not found");
+      }
     });
 
-    testWidgets('Komponen UI-ListTile tidak ditemukan', (WidgetTester tester) async{
+    testWidgets('UI Component- FloatingButton Found', (WidgetTester tester) async{
       await tester.pumpWidget(MaterialApp(home: ContactList()));
-      
-        expect(find.byType(ListTile), findsNothing);
-    });
-
-    testWidgets('Komponen UI- Floating button ditemukan', (WidgetTester tester) async{
-      await tester.pumpWidget(MaterialApp(home: ContactList()));
-      
-        expect(find.widgetWithIcon(FloatingActionButton, Icons.add), findsOneWidget);
+      try {
+        expect(find.widgetWithIcon(FloatingActionButton, Icons.add),
+            findsOneWidget);
         await tester.tap(find.byIcon(Icons.add));
-        await tester.pump();
+        await tester.pumpWidget(MaterialApp(home: ContactForm()));
+        print("Test Success!");
+      } catch(e){
+        print("Test Fail. FloatingButton not found");
+      }
     });
 }

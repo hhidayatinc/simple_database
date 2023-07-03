@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:simple_database/screens/contact_form.dart';
 
 void main(){
-  testWidgets('UI Component-AppBar', (WidgetTester tester) async{
+  testWidgets('UI Component-AppBar Found', (WidgetTester tester) async{
     await tester.pumpWidget(MaterialApp(home: ContactForm()));
     try{
     expect(find.byType(AppBar), findsOneWidget);
@@ -13,7 +13,7 @@ void main(){
     }
   });
 
-  testWidgets('UI Component-Title AppBar', (WidgetTester tester) async{
+  testWidgets('UI Component-Title AppBar Found', (WidgetTester tester) async{
     await tester.pumpWidget(MaterialApp(home: ContactForm()));
     try {
       expect(find.widgetWithText(AppBar, 'Contact Form'), findsOneWidget);
@@ -23,7 +23,7 @@ void main(){
     }
   });
 
-  testWidgets('UI Component-Form', (WidgetTester tester) async{
+  testWidgets('UI Component-Form Found', (WidgetTester tester) async{
     await tester.pumpWidget(MaterialApp(home: ContactForm()));
     try {
       expect(find.byType(Form), findsOneWidget);
@@ -33,7 +33,7 @@ void main(){
     }
   });
 
-  testWidgets('UI Component-ListView Form', (WidgetTester tester) async{
+  testWidgets('UI Component-ListView Form Found', (WidgetTester tester) async{
     await tester.pumpWidget(MaterialApp(home: ContactForm()));
     try {
       expect(find.byType(ListView), findsOneWidget);
@@ -43,7 +43,7 @@ void main(){
     }
   });
 
-  testWidgets('UI Component-TextFormField', (WidgetTester tester) async{
+  testWidgets('UI Component-TextFormField Found', (WidgetTester tester) async{
     await tester.pumpWidget(MaterialApp(home: ContactForm()));
     try {
       expect(find.byType(TextFormField), findsNWidgets(4));
@@ -53,7 +53,7 @@ void main(){
     }
   });
 
-  testWidgets('UI Component-ElevatedButton', (WidgetTester tester) async{
+  testWidgets('UI Component-ElevatedButton Found', (WidgetTester tester) async{
     await tester.pumpWidget(MaterialApp(home: ContactForm()));
     try {
       expect(find.byType(ElevatedButton), findsOneWidget);
@@ -63,7 +63,7 @@ void main(){
     }
   });
 
-  testWidgets('UI Component-ElevatedButton-Add', (WidgetTester tester) async{
+  testWidgets('UI Component-ElevatedButton-Add Found', (WidgetTester tester) async{
     await tester.pumpWidget(MaterialApp(home: ContactForm()));
     try {
       expect(find.widgetWithText(ElevatedButton, 'Add'), findsOneWidget);
@@ -73,13 +73,13 @@ void main(){
     }
   });
 
-  testWidgets('UI Component-ElevatedButton-Update', (WidgetTester tester) async{
+  testWidgets('UI Component-ElevatedButton-Update Not Found', (WidgetTester tester) async{
     await tester.pumpWidget(MaterialApp(home: ContactForm()));
     try {
-      expect(find.widgetWithText(ElevatedButton, 'Update'), findsOneWidget);
+      expect(find.widgetWithText(ElevatedButton, 'Update'), findsNothing);
       print('Test Success!');
     } catch(e){
-      print('Test fail. Button not found');
+      print('Test fail. Button Update found');
     }
   });
 }

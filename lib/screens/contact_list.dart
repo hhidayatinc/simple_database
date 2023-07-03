@@ -14,13 +14,17 @@ class ContactList extends StatefulWidget{
 }
 
 class ContactListState extends State<ContactList>{
-  List<Contact> listContact = [];
+  List<Contact> listContact = [
+    Contact(name: "Risa", email: "risa@gmail.com", number: "087654389090", company: "Polinema")
+  ];
   DbHelper db = DbHelper();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Contact List with Database SQLite"),
+        title: const Center(
+          child: Text("ContactList"),
+        ),
       ),
       body: ListView.builder(
         itemCount: listContact.length,
