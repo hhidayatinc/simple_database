@@ -6,7 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:simple_database/main.dart';
 
 void main() {
-  testWidgets('MyApp mempunyai AppBar dengan title Simple Database SQLite', (WidgetTester tester) async {
+  testWidgets('AppBar has title', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(const MyApp());
     try {
@@ -19,7 +19,7 @@ void main() {
     }
   });
 
-  testWidgets('Teks Hello di MyHomePage', (WidgetTester tester) async{
+  testWidgets('Teks Hello found', (WidgetTester tester) async{
     await tester.pumpWidget(const MyApp());
     try {
       expect(find.text('Hello'), findsOneWidget);
