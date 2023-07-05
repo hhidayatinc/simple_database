@@ -14,10 +14,12 @@ class ContactList extends StatefulWidget{
 }
 
 class ContactListState extends State<ContactList>{
-  List<Contact> listContact = [
-    Contact(name: "Risa", email: "risa@gmail.com", number: "087654389090", company: "Polinema")
-  ];
+  List<Contact> listContact = [];
   DbHelper db = DbHelper();
+  void initState() {
+    _getAllContact();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,14 +83,14 @@ class ContactListState extends State<ContactList>{
                         icon: const Icon(Icons.delete),
                         onPressed: (){
                           //membuat dialog konfirmasi hapus
-                          AlertDialog hapus = AlertDialog(
+                          AlertDialog delete = AlertDialog(
                             title: const Text("Information"),
                             content: SizedBox(
                               height: 100,
                               child: Column(
                                 children: [
                                   Text(
-                                      "Yakin ingin Menghapus Data ${c.name}"
+                                      "Are you sure to delete thos contact?"
                                   )
                                 ],
                               ),
@@ -97,17 +99,17 @@ class ContactListState extends State<ContactList>{
                             actions: [
                               TextButton(
                                   onPressed: () async{_deleteContact(c, i);},
-                                  child: const Text("Ya")
+                                  child: const Text("Yes")
                               ),
                               TextButton(
-                                child: const Text('Tidak'),
+                                child: const Text('No'),
                                 onPressed: () {
                                   Navigator.pop(context);
                                 },
                               ),
                             ],
                           );
-                          showDialog(context: context, builder: (context) => hapus);
+                          showDialog(context: context, builder: (context) => delete);
                         },
                       )
                     ],
@@ -118,7 +120,6 @@ class ContactListState extends State<ContactList>{
         },
       ),
        floatingActionButton: FloatingActionButton(
-        key: const Key('add icon'),
         child: const Icon(Icons.add),
         onPressed: () {
           _openFormCreate();
@@ -126,22 +127,17 @@ class ContactListState extends State<ContactList>{
       ),
     );
   }
-    //mengambil semua data Contact
+
   Future<void> _getAllContact() async {
-    //list menampung data dari database
     var list = await db.getAllContact();
-    //ada perubahanan state
     setState(() {
       listContact.clear();
-      //lakukan perulangan pada variabel list
       for (var data in list!) {
-        //masukan data ke listContact
         listContact.add(Contact.fromMap(data));
       }
     });
   }
 
-  //menghapus data Contact
   Future<void> _deleteContact(Contact contact, int position) async {
     await db.deleteContact(contact.id!);
     setState(() {
@@ -149,7 +145,6 @@ class ContactListState extends State<ContactList>{
     });
   }
 
-  // membuka halaman tambah Contact
   Future<void> _openFormCreate() async {
     var result = await Navigator.push(
         context, MaterialPageRoute(builder: (context) => ContactForm()));
@@ -158,7 +153,6 @@ class ContactListState extends State<ContactList>{
     }
   }
 
-  //membuka halaman edit Contact
   Future<void> _openFormEdit(Contact contact) async {
     var result = await Navigator.push(context,
         MaterialPageRoute(builder: (context) => ContactForm(contact: contact)));
