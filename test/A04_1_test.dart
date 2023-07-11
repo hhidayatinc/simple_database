@@ -17,7 +17,7 @@ void main(){
   testWidgets('UI Component-Title AppBar Found', (WidgetTester tester) async{
     await tester.pumpWidget(MaterialApp(home: ContactList()));
     try{
-      expect(find.widgetWithText(Center, 'ContactList'), findsOneWidget);
+      expect(find.widgetWithText(Center, 'Contact List'), findsOneWidget);
       print("Test Success!");
     }catch(e){
       print("Test Fail. Title AppBar not found");

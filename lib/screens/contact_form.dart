@@ -178,4 +178,3 @@ class ContactFormState extends State<ContactForm>{
     }
   }
 }
-

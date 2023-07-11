@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -12,10 +10,9 @@ void main() {
     try {
       expect(find.widgetWithText(AppBar, "Simple Database SQLite"),
           findsOneWidget);
-      print("Test Berhasil");
+      print("Test Success");
     } catch(error){
-      print("Test gagal");
-      print("Text appbar tidak sesuai");
+      print("Test Fail. Text AppBar not match");
     }
   });
 
@@ -23,10 +20,9 @@ void main() {
     await tester.pumpWidget(const MyApp());
     try {
       expect(find.text('Hello'), findsOneWidget);
-      print("Test Berhasil");
+      print("Test Success");
     } catch(error){
-      print("Test gagal");
-      print("Text Hello tidak ditemukan");
+      print("Test Fail. Text Hello not found");
     }
   });
 }
