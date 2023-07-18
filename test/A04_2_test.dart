@@ -8,6 +8,20 @@ List<Contact> cl = [
   Contact(name: "Risa", email: "risa@gmail.com", number: "087654389090", company: "Polinema")
 ];
 void main() {
+
+  testWidgets("Contact List when there is data - List Tiles appear with the same number", (WidgetTester tester)async{
+    await tester.pumpWidget(MaterialApp(home: ContactList()));
+    for (int i = 0; i < cl.length; i++) {
+      try {
+        expect(find.byType(ListTile), findsNWidgets(cl.length));
+        print("Test Success!");
+      } catch(e){
+        print("Test Fail.");
+        print('The number of widget ListTile that appear is not the same as the data in the database');
+        print('Please make sure you have followed the step in guide document');
+      }
+    }
+  });
   testWidgets("ContactList has data name", (WidgetTester tester) async {
     await tester.pumpWidget(MaterialApp(home: ContactList()));
     for (int i = 0; i < cl.length; i++) {
@@ -17,6 +31,8 @@ void main() {
         print("Test Success!");
       } catch(e){
         print("Test Failed");
+        print("Contact Data Name Not Found");
+        print('Please make sure you have followed the step in guide document');
       }
     }
   });
@@ -30,6 +46,8 @@ void main() {
         print("Test Success");
       }catch(e) {
         print('Test Fail!');
+        print("Contact data number phone Not Found");
+        print('Please make sure you have followed the step in guide document');
       }
     }
   });
@@ -43,6 +61,8 @@ void main() {
         print("Test Success");
       }catch(e) {
         print('Test Fail!');
+        print("Contact data company Not Found");
+        print('Please make sure you have followed the step in guide document');
       }
     }
   });
@@ -57,18 +77,8 @@ void main() {
         print("Test Success");
       }catch(e) {
         print('Test Fail!');
-      }
-    }
-  });
-
-  testWidgets("Contact List when there is data - List Tiles appear with the same number", (WidgetTester tester)async{
-    await tester.pumpWidget(MaterialApp(home: ContactList()));
-    for (int i = 0; i < cl.length; i++) {
-      try {
-        expect(find.byType(ListTile), findsNWidgets(cl.length));
-        print("Test Success!");
-      } catch(e){
-        print("Test Fail.");
+        print("Contact data email Not Found");
+        print('Please make sure you have followed the step in guide document');
       }
     }
   });
@@ -84,6 +94,8 @@ void main() {
         print("Test Success!");
       } catch(e){
         print("Test Fail");
+        print("Add IconButton delete in ListTile widget");
+        print('Please make sure you have followed the step in guide document');
       }
     }
   });
@@ -101,6 +113,8 @@ void main() {
         print("Test Success!");
       } catch(e){
         print("Test Fail.");
+        print("Add IconButton edit in ListTile widget");
+        print('Please make sure you have followed the step in guide document');
       }
     }
   });

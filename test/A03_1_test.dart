@@ -10,6 +10,7 @@ void main(){
     print("Test Success!");
   } catch(e) {
       print('Test Fail. App Bar not found');
+      print("Please check your code in ContactForm class after widget Scaffold.");
     }
   });
 
@@ -20,6 +21,7 @@ void main(){
       print('Test Success!');
     } catch(e){
       print('Test Fail. Title App Bar Not Match');
+      print('The correct title for AppBar is Contact Form');
     }
   });
 
@@ -30,6 +32,7 @@ void main(){
       print('Test Success!');
     }catch(e){
       print('Test Fail. Form not found');
+      print('Parameter widget body is Form. Please review your code and make sure your parameter widget body is right');
     }
   });
 
@@ -40,6 +43,8 @@ void main(){
       print('Test Success!');
     } catch(e){
       print('Test Fail. Listview Form not found');
+      print('This ListView is parameter child widget from Form.');
+      print('Please review your code and make sure that you provide the correct widget');
     }
   });
 
@@ -50,6 +55,8 @@ void main(){
       print('Test Success!');
     } catch(e){
       print('Test Fail. 4 TextFormField not found');
+      print('Check your code and make sure you have 4 widget TextFormField.');
+      print('This widget for insert data name, email, company, and number');
     }
   });
 
@@ -60,6 +67,7 @@ void main(){
       print('Test Success!');
     } catch(e){
       print('Test fail. Button not found');
+      print('Please add this button in the end of the last TextFormField and use widget ElevatedButton');
     }
   });
 
@@ -70,6 +78,7 @@ void main(){
       print('Test Success!');
     } catch(e){
       print('Test Fail. Button Add not found');
+      print('Make sure the value in Text widget is Add');
     }
   });
 
@@ -80,6 +89,7 @@ void main(){
       print('Test Success!');
     } catch(e){
       print('Test fail. Button Update found');
+      print('This button should not appear yet because the form is not for editing contact data');
     }
   });
 }

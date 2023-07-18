@@ -13,6 +13,7 @@ void main(){
     print("Test Success!");
   } catch(e) {
       print('Test Fail. App Bar not found');
+      print("Please check your code in ContactForm class after widget Scaffold.");
     }
   });
 
@@ -23,6 +24,8 @@ void main(){
       print('Test Success!');
     } catch(e){
       print('Test Fail. Title App Bar Not Match');
+      print('The correct title for AppBar is Contact Form');
+
     }
   });
 
@@ -33,6 +36,7 @@ void main(){
       print('Test Success!');
     }catch(e){
       print('Test Fail. Form not found');
+      print('Parameter widget body is Form. Please review your code and make sure your parameter widget body is right');
     }
   });
 
@@ -43,6 +47,8 @@ void main(){
       print('Test Success!');
     } catch(e){
       print('Test Fail. Listview Form not found');
+      print('This ListView is parameter child widget from Form.');
+      print('Please review your code and make sure that you provide the correct widget');
     }
   });
 
@@ -53,6 +59,8 @@ void main(){
       print('Test Success!');
     } catch(e){
       print('Test Fail. 4 TextFormField not found');
+      print('Check your code and make sure you have 4 widget TextFormField.');
+      print('This widget for insert data name, email, company, and number');
     }
   });
   
@@ -64,6 +72,7 @@ void main(){
     } catch(e){
       print('Test Fail!');
       print('TextFormField Name has no data');
+      print('Make sure you have added the widget.contact.name variable to the ContactForm class');
     }
   });
 
@@ -75,6 +84,7 @@ void main(){
     } catch(e){
       print('Test Fail!');
       print('TextFormField Email has no data');
+      print('Make sure you have added the widget.contact.email variable to the ContactForm class');
     }
   });
 
@@ -86,10 +96,11 @@ void main(){
     } catch(e){
       print('Test Fail!');
       print('TextFormField Company has no data');
+      print('Make sure you have added the widget.contact.company variable to the ContactForm class');
     }
   });
 
-  testWidgets('TextFormField email has data', (WidgetTester tester) async{
+  testWidgets('TextFormField number phone has data', (WidgetTester tester) async{
     await tester.pumpWidget(MaterialApp(home: ContactForm(contact: c,)));
     try{
       expect(find.widgetWithText(TextFormField, 'Risa'), findsOneWidget);
@@ -97,6 +108,7 @@ void main(){
     } catch(e){
       print('Test Fail!');
       print('TextFormField Name has no data');
+      print('Make sure you have added the widget.contact.number variable to the ContactForm class');
     }
   });
 
@@ -107,27 +119,32 @@ void main(){
       print('Test Success!');
     } catch(e){
       print('Test fail. Button not found');
+      print('Please add this button in the end of the last TextFormField and use widget ElevatedButton');
     }
   });
 
-  testWidgets('UI Component-ElevatedButton-Add Found', (WidgetTester tester) async{
-    await tester.pumpWidget(MaterialApp(home: ContactForm(contact: c)));
-    try {
-      expect(find.widgetWithText(ElevatedButton, 'Add'), findsNothing);
-      print('Test Success!');
-    } catch(e){
-      print('Test Fail. Button Add found');
-    }
-  });
-
-   testWidgets('UI Component-ElevatedButton-Update Found', (WidgetTester tester) async{
+  testWidgets('UI Component-ElevatedButton-Update Found', (WidgetTester tester) async{
     await tester.pumpWidget(MaterialApp(home: ContactForm(contact: c)));
     try {
       expect(find.widgetWithText(ElevatedButton, 'Update'), findsOneWidget);
       print('Test Success!');
     } catch(e){
       print('Test fail. Button Update not found');
+      print('Make sure the value in Text widget is Update');
     }
   });
 
+
+  testWidgets('UI Component-ElevatedButton-Add Not Found', (WidgetTester tester) async{
+    await tester.pumpWidget(MaterialApp(home: ContactForm(contact: c)));
+    try {
+      expect(find.widgetWithText(ElevatedButton, 'Add'), findsNothing);
+      print('Test Success!');
+    } catch(e){
+      print('Test Fail. Button Add found');
+      print('This button should not appear yet because the form is not for adding contact data');
+    }
+  });
+
+   
 }

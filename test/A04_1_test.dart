@@ -11,16 +11,18 @@ void main(){
         print("Test Success!");
       }catch(e){
         print("Test Fail. AppBar not found ");
+        print("Please check your code in ContactList class after widget Scaffold.");
       }
     });
 
-  testWidgets('UI Component-Title AppBar Found', (WidgetTester tester) async{
+  testWidgets('UI Component-Title AppBar Found', (WidgetTester tester) async {
     await tester.pumpWidget(MaterialApp(home: ContactList()));
     try{
-      expect(find.widgetWithText(Center, 'Contact List'), findsOneWidget);
+      expect(find.widgetWithText(Center, 'ContactList'), findsOneWidget);
       print("Test Success!");
     }catch(e){
       print("Test Fail. Title AppBar not found");
+      print("Please check the tittle. The correct title is ContactList");
     }
   });
 
@@ -31,6 +33,7 @@ void main(){
         print("Test Success!");
       } catch(e){
         print("Test Fail. ListView not found");
+        print("Add ListView widget after AppBar or check your guide again");
       }
     });
 
@@ -44,6 +47,7 @@ void main(){
         print("Test Success!");
       } catch(e){
         print("Test Fail. FloatingButton not found");
+        print("Please review your code, and add a FloatingActionButton widget in the bottom right corner");
       }
     });
 }

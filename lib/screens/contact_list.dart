@@ -14,7 +14,9 @@ class ContactList extends StatefulWidget{
 }
 
 class ContactListState extends State<ContactList>{
-  List<Contact> listContact = [];
+  List<Contact> listContact = [
+    Contact(name: "Risa", email: "risa@gmail.com", number: "087654389090", company: "Polinema")
+  ];
   DbHelper db = DbHelper();
   void initState() {
     _getAllContact();

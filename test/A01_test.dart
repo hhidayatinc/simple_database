@@ -13,6 +13,7 @@ void main() {
       print("Test Success");
     } catch(error){
       print("Test Fail. Text AppBar not match");
+      print("The correct titile ");
     }
   });
 
