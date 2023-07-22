@@ -46,12 +46,12 @@ class ContactFormState extends State<ContactForm>{
           child: ListView(
             padding: const EdgeInsets.all(16.0),
             children: [
-
               Padding(
                 padding: const EdgeInsets.only(
                   top: 20,
                 ),
                 child: TextFormField(
+                  key: const Key('name_textformfield'),
                   controller: nameController,
                   decoration: InputDecoration(
                       labelText: 'Name',
@@ -71,6 +71,7 @@ class ContactFormState extends State<ContactForm>{
                   top: 20,
                 ),
                 child: TextFormField(
+                  key: const Key('number_textformfield'),
                   controller: numberController,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
@@ -91,6 +92,7 @@ class ContactFormState extends State<ContactForm>{
                   top: 20,
                 ),
                 child: TextFormField(
+                  key: const Key('email_textformfield'),
                   controller: emailController,
                   keyboardType: TextInputType.emailAddress,
                   validator: (value) {
@@ -117,6 +119,7 @@ class ContactFormState extends State<ContactForm>{
                   top: 20,
                 ),
                 child: TextFormField(
+                  key: const Key('company_textformfield'),
                   controller: companyController,
                   decoration: InputDecoration(
                       labelText: 'Company',

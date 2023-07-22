@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:simple_database/utils/dbhelper.dart';
 
@@ -15,7 +13,7 @@ class ContactList extends StatefulWidget{
 
 class ContactListState extends State<ContactList>{
   List<Contact> listContact = [
-    Contact(name: "Risa", email: "risa@gmail.com", number: "087654389090", company: "Polinema")
+    //Contact(name: "Risa", email: "risa@gmail.com", number: "087654389090", company: "Polinema")
   ];
   DbHelper db = DbHelper();
   void initState() {

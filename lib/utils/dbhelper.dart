@@ -13,13 +13,6 @@ class DbHelper{
 
   static Database? _database;
 
-  final String tableName = 'contact';
-  final String columnId = 'id';
-  final String columnName = 'name';
-  final String columnNumber = 'number';
-  final String columnEmail = 'email';
-  final String columnCompany = 'company';
-
   Future<Database?> get database async {
     if (_database != null) {
       return _database;
@@ -38,12 +31,12 @@ class DbHelper{
       version: 1,
       onCreate: (db, version) async {
         await db.execute('''
-          CREATE TABLE $tableName(
-            $columnId INTEGER PRIMARY KEY AUTOINCREMENT,
-            $columnName TEXT,
-            $columnNumber TEXT,
-            $columnEmail TEXT,
-            $columnCompany TEXT
+          CREATE TABLE contact(
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            number TEXT NOT NULL,
+            email TEXT NOT NULL,
+            company TEXT NOT NULL
           )
         ''');
       },
@@ -52,30 +45,49 @@ class DbHelper{
 
   Future<int?> saveContact(Contact contact) async {
     var dbClient = await database;
-    return await dbClient!.insert(tableName, contact.toMap());
+    try {
+     int result = await dbClient!.rawInsert(
+          "INSERT INTO contact (name, number, email, company) VALUES (?, ?, ?, ?)",
+          [contact.name, contact.number, contact.email, contact.company]);
+     print(result);
+    } catch(e){
+      print('Error inserting data: $e');
+      return 0;
+    }
   }
 
   Future<List?> getAllContact() async {
     var db = await database;
-    var result = await db!.query(tableName, columns: [
-      columnId,
-      columnName,
-      columnCompany,
-      columnNumber,
-      columnEmail
-    ]);
-    return result.toList();
+    try {
+      var result = await db!.rawQuery("SELECT * FROM contact");
+      return result.toList();
+    } catch(e){
+      print('Error retrieve all the data: $e');
+      return null;
+    }
   }
 
-  //update database
   Future<int?> updateContact(Contact contact) async {
     var dbClient = await database;
-    return await dbClient!.update(tableName, contact.toMap(), where: '$columnId = ?', whereArgs: [contact.id]);
+    try{
+    var result = await dbClient!.rawUpdate("UPDATE contact SET name=?, number=?, email=?, company=? WHERE id=?",
+        [contact.name, contact.number, contact.email, contact.company, contact.id]);
+    return result;
+    }catch(e){
+      print('update data error: $e');
+      return 0;
+    }
   }
-
-  //hapus database
   Future<int?> deleteContact(int id) async {
     final dbClient = await database;
-    return await dbClient!.delete(tableName,  where: '$columnId = ?', whereArgs: [id]);
+    try {
+      int result = await dbClient!.rawDelete("DELETE FROM contact WHERE id=?", [id]);
+      return result;
+    } catch(e){
+      print('deleting data error: $e');
+      return 0;
+    }
   }
+
 }
+

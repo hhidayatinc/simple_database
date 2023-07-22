@@ -4,6 +4,18 @@ import 'package:simple_database/screens/contact_form.dart';
 import 'package:simple_database/screens/contact_list.dart';
 
 void main(){
+  void checkNWidget(Finder finder, int n, String reason) {
+    expect(finder, findsNWidgets(n), reason: reason);
+  }
+
+  void checkOneWidget(Finder finder, String reason){
+    expect(finder, findsOneWidget, reason: reason);
+  }
+
+  void checkNothing(Finder finder, String reason){
+    expect(finder, findsNothing, reason: reason);
+  }
+
     testWidgets('UI Component-AppBar Found', (WidgetTester tester) async {
       await tester.pumpWidget(MaterialApp(home: ContactList()));
       try{

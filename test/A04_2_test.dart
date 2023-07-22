@@ -13,7 +13,7 @@ void main() {
     await tester.pumpWidget(MaterialApp(home: ContactList()));
     for (int i = 0; i < cl.length; i++) {
       try {
-        expect(find.byType(ListTile), findsNWidgets(cl.length));
+        expect(find.byType(ListTile, skipOffstage: false), findsNWidgets(cl.length),reason: "not Found");
         print("Test Success!");
       } catch(e){
         print("Test Fail.");

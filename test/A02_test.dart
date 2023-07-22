@@ -20,59 +20,92 @@ Future main() async {
     await dbhelper.initDatabase();
   });
 
+
   test('Save Contact Test', () async {
-    Contact contact = Contact(name: 'Rizki', number: '081234567892', email: 'rizqi@example.com', company: 'Example Inc.');
+    Contact contact = Contact(name: 'Rizkia', number: '081234567892', email: 'rizqi@example.com');
     int? result = await dbhelper.saveContact(contact);
-    try {
-      expect(result, isNotNull);
-      print('Test Success');
-    } catch(e){
-      print('Test Fail');
-      print('Data length null, check on saveContact code');
-    }
+      expect(result, contact.id, reason: "There is something wrong with your saveContact code, back to guideA02");
+
   });
 
   test('Get All Contact Test', () async {
     List? result = await dbhelper.getAllContact();
-    try {
-      expect(result?.length, greaterThanOrEqualTo(0));
-      print('Test Success');
-    } catch(e){
-      print('Test Fail');
-      print('Data length null, check on getAllContact code');
-    }
+      expect(result?.length, greaterThanOrEqualTo(0), reason: "There is something wrong with your getAllContact code. "
+          "Back to Guide A02");
   });
 
-  test('Update Contact Test', () async {
+  test('Update Contact Test-Column Name', () async {
     List? result = await dbhelper.getAllContact();
     int id = result![0]['id'];
+    String email = result[0]['email'];
+    String number = result[0]['number'];
+    String company = result[0]['company'];
     Contact contact = Contact(
       id: id,
-      name: 'Rizqy',
-      number: '08123456789',
-      email: 'rizqy@mail.com',
-      company: 'Example Inc',
+      name: 'Ana',
+      number: number,
+      email: email,
+      company: company,
     );
     int? updateResult = await dbhelper.updateContact(contact);
-    try {
       expect(updateResult, greaterThanOrEqualTo(1));
-      print('Test Success');
-    } catch(e){
-      print('Test Fail');
-      print('Data not updated, check on updateContact code');
-    }
   });
+  test('Update Contact Test-Column number', () async {
+    List? result = await dbhelper.getAllContact();
+    int id = result![0]['id'];
+    String email = result[0]['email'];
+    String name = result[0]['name'];
+    String company = result[0]['company'];
+    Contact contact = Contact(
+      id: id,
+      name: name,
+      number: '0879652437',
+      email: email,
+      company: company,
+    );
+    int? updateResult = await dbhelper.updateContact(contact);
+      expect(updateResult, greaterThanOrEqualTo(1));
+  });
+ 
+ test('Update Contact Test-Column email', () async {
+    List? result = await dbhelper.getAllContact();
+    int id = result![0]['id'];
+    String name = result[0]['name'];
+    String number = result[0]['number'];
+    String company = result[0]['company'];
+    Contact contact = Contact(
+      id: id,
+      name: name,
+      number: number,
+      email: 'ana@gmail.com',
+      company: company,
+    );
+    int? updateResult = await dbhelper.updateContact(contact);
+      expect(updateResult, greaterThanOrEqualTo(1));
+  });
+
+  test('Update Contact Test-Column Company', () async {
+    List? result = await dbhelper.getAllContact();
+    int id = result![0]['id'];
+    String email = result[0]['email'];
+    String number = result[0]['number'];
+    String name = result[0]['name'];
+    Contact contact = Contact(
+      id: id,
+      name: name,
+      number: number,
+      email: email,
+      company: 'Polinema',
+    );
+    int? updateResult = await dbhelper.updateContact(contact);
+      expect(updateResult, greaterThanOrEqualTo(1));
+  });
+
   test('Delete Kontak Test', () async {
     List? result = await dbhelper.getAllContact();
     int id = result![0]['id'];
     int? deleteResult = await dbhelper.deleteContact(id);
-    try {
-      expect(deleteResult, greaterThanOrEqualTo(0));
-      print('Test Success');
-    } catch(e){
-      print('Test Fail');
-      print('Delete data fail, check on deleteContact code');
-    }
+      expect(deleteResult, 1, reason: "There is something wrong in delete code");
   });
 
 }
