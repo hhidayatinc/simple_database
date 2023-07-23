@@ -38,7 +38,8 @@ void main(){
   testWidgets('UI Component-ListView Found', (WidgetTester tester) async{
     await tester.pumpWidget(MaterialApp(home: ContactForm()));
     Finder findListViewWidget = find.byType(ListView);
-     checkOneWidget(findListViewWidget, 'Add ListView for child widget in Form. Look at your Guide A03 for the correct structure widget');
+     checkOneWidget(findListViewWidget, 'Add ListView for child widget in Form. '
+         'Look at your Guide A03 for the correct structure widget');
   });
 
   testWidgets('UI Component-4 TextFormField Found', (WidgetTester tester) async{
@@ -52,7 +53,8 @@ void main(){
   testWidgets('UI Component-ElevatedButton', (WidgetTester tester) async{
     await tester.pumpWidget(MaterialApp(home: ContactForm()));
     Finder findElevatedButton = find.byType(ElevatedButton);
-    checkOneWidget(findElevatedButton, 'Add ElevatedButton at the end of 4 TextFormField');
+    checkOneWidget(findElevatedButton, 'Add ElevatedButton at the end of TextFormField');
+
   });
 
   testWidgets('UI Component-ElevatedButton-Update Not Found', (WidgetTester tester) async{
@@ -66,8 +68,6 @@ void main(){
     await tester.pumpWidget(MaterialApp(home: ContactForm()));
     String add = 'Add';
     Finder findTextAdd = find.widgetWithText(ElevatedButton, add);
-    checkOneWidget(findTextAdd, 'Update Button required. Review your code and Guide A03');
+    checkOneWidget(findTextAdd, 'Add Button required. Review your code and Guide A03');
   });
-
-   
 }

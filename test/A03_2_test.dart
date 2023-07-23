@@ -98,6 +98,4 @@ void main(){
     Finder findTextAdd = find.widgetWithText(ElevatedButton, add);
     checkNothing(findTextAdd, 'This button should not exist');
   });
-
-   
 }

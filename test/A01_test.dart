@@ -7,23 +7,12 @@ void main() {
   testWidgets('AppBar has title', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(const MyApp());
-    try {
       expect(find.widgetWithText(AppBar, "Simple Database SQLite"),
-          findsOneWidget);
-      print("Test Success");
-    } catch(error){
-      print("Test Fail. Text AppBar not match");
-      print("The correct titile ");
-    }
+          findsOneWidget, reason: 'Title AppBar Not match');
   });
 
   testWidgets('Teks Hello found', (WidgetTester tester) async{
     await tester.pumpWidget(const MyApp());
-    try {
-      expect(find.text('Hello'), findsOneWidget);
-      print("Test Success");
-    } catch(error){
-      print("Test Fail. Text Hello not found");
-    }
+      expect(find.text('Hello'), findsOneWidget, reason: 'Text Hello not found');
   });
 }

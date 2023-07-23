@@ -5,7 +5,7 @@ class Contact{
   String? email;
   String? company;
 
-  Contact({this.id,  this.name,  this.number,  this.email,  this.company});
+  Contact({this.id,  required this.name,  required this.number,  required this.email,  required this.company});
 
   Map<String, dynamic> toMap() {
     var map = <String, dynamic>{};

@@ -62,7 +62,6 @@ class ContactFormState extends State<ContactForm>{
                     if(value!.isEmpty){
                       return 'Please enter your name';
                     }
-                    return null;
                   },
                 ),
               ),
@@ -80,10 +79,9 @@ class ContactFormState extends State<ContactForm>{
                         borderRadius: BorderRadius.circular(8),
                       )),
                   validator: (value){
-                    if(value!.isEmpty){
+                    if(value!.isEmpty) {
                       return 'Please enter your phone number';
                     }
-                    return null;
                   },
                 ),
               ),
@@ -104,8 +102,6 @@ class ContactFormState extends State<ContactForm>{
                     if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
                       return "Please enter a valid email address";
                     }
-                    // the email is valid
-                    return null;
                   },
                   decoration: InputDecoration(
                       labelText: 'Email',
@@ -126,6 +122,11 @@ class ContactFormState extends State<ContactForm>{
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
                       )),
+                  validator: (value){
+                    if(value!.isEmpty) {
+                      return 'Please enter your phone number';
+                    }
+                  },
                 ),
               ),
               Padding(

@@ -24,13 +24,14 @@ class DbHelper{
 
   Future<Database?> initDatabase() async {
     WidgetsFlutterBinding.ensureInitialized();
-    final databasesPath = await getApplicationDocumentsDirectory();
-    final path = join(databasesPath.path, 'contactList.db');
-    return openDatabase(
-      path,
-      version: 1,
-      onCreate: (db, version) async {
-        await db.execute('''
+    try {
+      final databasesPath = await getApplicationDocumentsDirectory();
+      final path = join(databasesPath.path, 'contactList.db');
+      return openDatabase(
+        path,
+        version: 1,
+        onCreate: (db, version) async {
+          await db.execute('''
           CREATE TABLE contact(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL,
@@ -39,8 +40,11 @@ class DbHelper{
             company TEXT NOT NULL
           )
         ''');
-      },
-    );
+        },
+      );
+    } catch(e){
+      print('Error opening database: $e');
+    }
   }
 
   Future<int?> saveContact(Contact contact) async {
@@ -49,7 +53,7 @@ class DbHelper{
      int result = await dbClient!.rawInsert(
           "INSERT INTO contact (name, number, email, company) VALUES (?, ?, ?, ?)",
           [contact.name, contact.number, contact.email, contact.company]);
-     print(result);
+     // return result;
     } catch(e){
       print('Error inserting data: $e');
       return 0;

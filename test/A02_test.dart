@@ -22,16 +22,16 @@ Future main() async {
 
 
   test('Save Contact Test', () async {
-    Contact contact = Contact(name: 'Rizkia', number: '081234567892', email: 'rizqi@example.com');
+    Contact contact = Contact(name: 'Rizkia', number: '081234567892', email: 'rizqi@example.com', company: 'Polinema');
     int? result = await dbhelper.saveContact(contact);
       expect(result, contact.id, reason: "There is something wrong with your saveContact code, back to guideA02");
-
   });
 
   test('Get All Contact Test', () async {
     List? result = await dbhelper.getAllContact();
       expect(result?.length, greaterThanOrEqualTo(0), reason: "There is something wrong with your getAllContact code. "
           "Back to Guide A02");
+      print(result.toString());
   });
 
   test('Update Contact Test-Column Name', () async {
