@@ -4,50 +4,64 @@ import 'package:simple_database/screens/contact_form.dart';
 import 'package:simple_database/screens/contact_list.dart';
 
 void main(){
-  void checkOneWidget(Finder finder, String reason){
-    expect(finder, findsOneWidget, reason: reason);
+  void checkOneWidget(Finder finder){
+    const String trimStr1 = 'zero widgets with type "';
+    const String trimStr2 = '" (ignoring offstage widget)';
+    final finderMsg =
+    finder.toString().replaceAll(trimStr1, '').replaceAll(trimStr2, '');
+    expect(finder, findsOneWidget, reason: "Problem: Widget $finderMsg not found ");
   }
 
-  void checkNothing(Finder finder, String reason){
-    expect(finder, findsNothing, reason: reason);
+  void checkNothing(Finder finder){
+    const String trimStr1 = 'exactly one widget with type "';
+    const String trimStr2 = '" this button should not exist';
+    final finderMsg =
+    finder.toString().replaceAll(trimStr1, '').replaceAll(trimStr2, '');
+    expect(finder, findsNothing, reason: "Problem: $finderMsg");
   }
 
     testWidgets('UI Component-AppBar Found', (WidgetTester tester) async {
       await tester.pumpWidget(MaterialApp(home: ContactList()));
-      Finder findAppBar = find.byType(AppBar);
-      checkOneWidget(findAppBar, "Please check your code in ContactList class after widget Scaffold.");
+      Finder findAppBar = find.byKey(Key('appbar_contactlist'));
+      checkOneWidget(findAppBar);
     });
 
   testWidgets('UI Component-Title AppBar Found', (WidgetTester tester) async {
     await tester.pumpWidget(MaterialApp(home: ContactList()));
-    String titleAppBar = 'ContactList';
-    Finder findTitleAppBar = find.widgetWithText(AppBar, titleAppBar);
-    checkOneWidget(findTitleAppBar, 'The correct title for Appbar is $titleAppBar');
+    Finder findTitleAppBar = find.byKey(Key('title_appbar_contactlist'));
+    checkOneWidget(findTitleAppBar);
   });
 
     testWidgets('UI Component-ListView Found', (WidgetTester tester) async {
       await tester.pumpWidget(MaterialApp(home: ContactList()));
-      Finder findListViewWidget = find.byType(ListView);
-      checkOneWidget(findListViewWidget, 'Add ListView for child widget in Form. '
-          'Look at your Guide A04 for the correct structure widget');
+      Finder findListViewWidget = find.byKey(Key('listview_contactlist'));
+      checkOneWidget(findListViewWidget);
     });
 
-    testWidgets('UI Component-ListTile not found', (tester) async{
+    testWidgets('UI Component- Padding ListTile not found', (tester) async{
       await tester.pumpWidget(MaterialApp(home: ContactList()));
-      Finder findListTile = find.byType(ListTile);
-      checkNothing(findListTile, 'There is data show up, but actually nothing in list');
+      Finder findListTile = find.byKey(Key('padding_contactlist'));
+      checkNothing(findListTile);
     });
+
+  testWidgets('UI Component- ListTile not found', (tester) async{
+    await tester.pumpWidget(MaterialApp(home: ContactList()));
+    Finder findListTile = find.byType(ListTile);
+    checkNothing(findListTile);
+  });
+
 
     testWidgets('UI Component- FloatingButton Found', (WidgetTester tester) async{
       await tester.pumpWidget(MaterialApp(home: ContactList()));
-      Finder findButtonAdd = find.widgetWithIcon(FloatingActionButton, Icons.add);
-      checkOneWidget(findButtonAdd, "Please review your code, and add a FloatingActionButton widget in the bottom right corner");
-      await tester.tap(findButtonAdd);
+      Finder findButton = find.byKey(Key('button_add'));
+      Finder findIconAdd = find.byKey( Key('icon_add'));
+      checkOneWidget(findIconAdd);
+      checkOneWidget(findButton);
+      await tester.tap(findButton);
       await tester.pumpAndSettle();
       Finder findAppBar = find.byType(AppBar);
-      checkOneWidget(findAppBar, "Please check your code in ContactList class after widget Scaffold.");
-      String titleAppBar = 'Contact Form';
-      Finder findTitleAppBar = find.widgetWithText(AppBar, titleAppBar);
-      checkOneWidget(findTitleAppBar, "Widget AppBar not found. Please review Guide A03");
+      checkOneWidget(findAppBar);
+      Finder findTitleAppBar = find.byKey(Key('title_appbar_contactform'));
+      checkOneWidget(findTitleAppBar);
     });
 }

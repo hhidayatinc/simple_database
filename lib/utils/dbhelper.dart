@@ -11,6 +11,8 @@ class DbHelper{
 
   DbHelper._internal();
 
+  late BuildContext context;
+
   static Database? _database;
 
   Future<Database?> get database async {
@@ -55,7 +57,23 @@ class DbHelper{
           [contact.name, contact.number, contact.email, contact.company]);
      // return result;
     } catch(e){
-      print('Error inserting data: $e');
+      showDialog(
+          context: context, // Use the appropriate BuildContext
+          builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Error"),
+          content: Text("An error occurred while saving data."),
+          actions: <Widget>[
+            TextButton(
+              child: Text("OK"),
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+            ),
+          ],
+        );
+      },
+    );
       return 0;
     }
   }
@@ -66,7 +84,23 @@ class DbHelper{
       var result = await db!.rawQuery("SELECT * FROM contact");
       return result.toList();
     } catch(e){
-      print('Error retrieve all the data: $e');
+      showDialog(
+        context: context, // Use the appropriate BuildContext
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Error"),
+            content: Text("An error occurred while retrieving data."),
+            actions: <Widget>[
+              TextButton(
+                child: Text("OK"),
+                onPressed: () {
+                  Navigator.of(context).pop(); // Close the dialog
+                },
+              ),
+            ],
+          );
+        },
+      );
       return null;
     }
   }
@@ -78,7 +112,23 @@ class DbHelper{
         [contact.name, contact.number, contact.email, contact.company, contact.id]);
     return result;
     }catch(e){
-      print('update data error: $e');
+      showDialog(
+        context: context, // Use the appropriate BuildContext
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Error"),
+            content: Text("An error occurred while updating data."),
+            actions: <Widget>[
+              TextButton(
+                child: Text("OK"),
+                onPressed: () {
+                  Navigator.of(context).pop(); // Close the dialog
+                },
+              ),
+            ],
+          );
+        },
+      );
       return 0;
     }
   }
@@ -88,7 +138,23 @@ class DbHelper{
       int result = await dbClient!.rawDelete("DELETE FROM contact WHERE id=?", [id]);
       return result;
     } catch(e){
-      print('deleting data error: $e');
+      showDialog(
+        context: context, // Use the appropriate BuildContext
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Error"),
+            content: Text("An error occurred while deleting data."),
+            actions: <Widget>[
+              TextButton(
+                child: Text("OK"),
+                onPressed: () {
+                  Navigator.of(context).pop(); // Close the dialog
+                },
+              ),
+            ],
+          );
+        },
+      );
       return 0;
     }
   }

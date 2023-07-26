@@ -113,12 +113,10 @@ packages:
     source: sdk
     version: "0.0.0"
   integration_test:
-    dependency: "direct main"
-    description:
-      name: integration_test
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.8.1"
+    dependency: "direct dev"
+    description: flutter
+    source: sdk
+    version: "0.0.0"
   js:
     dependency: transitive
     description:

@@ -39,14 +39,17 @@ class ContactFormState extends State<ContactForm>{
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-            title: const Text('Contact Form')
+          key: Key('contact_form_appbar'),
+            title: const Text('Contact Form', key: Key('title_appbar_contactform'),)
         ),
         body: Form(
           key: _form,
           child: ListView(
+            key: Key('listview'),
             padding: const EdgeInsets.all(16.0),
             children: [
               Padding(
+                key: Key('padding_name'),
                 padding: const EdgeInsets.only(
                   top: 20,
                 ),
@@ -66,6 +69,7 @@ class ContactFormState extends State<ContactForm>{
                 ),
               ),
               Padding(
+                key: Key('padding_number'),
                 padding: const EdgeInsets.only(
                   top: 20,
                 ),
@@ -86,6 +90,7 @@ class ContactFormState extends State<ContactForm>{
                 ),
               ),
               Padding(
+                key: Key('padding_email'),
                 padding: const EdgeInsets.only(
                   top: 20,
                 ),
@@ -111,6 +116,7 @@ class ContactFormState extends State<ContactForm>{
                 ),
               ),
               Padding(
+                key: Key('padding_company'),
                 padding: const EdgeInsets.only(
                   top: 20,
                 ),
@@ -130,15 +136,17 @@ class ContactFormState extends State<ContactForm>{
                 ),
               ),
               Padding(
+                key: Key('padding_button'),
                 padding: const EdgeInsets.only(
                     top: 20
                 ),
                 child: ElevatedButton(
+                  key: Key('elevatedbutton_contactform'),
                   child: (widget.contact == null)
-                      ? const Text('Add',
+                      ? const Text('Add', key: Key('add_text'),
                     style: TextStyle(color: Colors.white),
                   )
-                      : const Text('Update',
+                      : const Text('Update', key: Key('update_text'),
                     style: TextStyle(color: Colors.white),
                   ),
                   onPressed: () {
@@ -163,7 +171,7 @@ class ContactFormState extends State<ContactForm>{
           email: emailController!.text,
           company: companyController!.text
       ));
-      Navigator.pop(context, 'update');
+      Navigator.pop(context, widget.contact);
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('Success update data'),
       ));
@@ -175,7 +183,7 @@ class ContactFormState extends State<ContactForm>{
         email: emailController!.text,
         company: companyController!.text,
       ));
-      Navigator.pop(context, 'save');
+      Navigator.pop(context, widget.contact);
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('Success add data'),
       ));
